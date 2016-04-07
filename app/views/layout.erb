@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/application.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/js/application.js"></script>
+
+  <title>Sockly</title>
+</head>
+<body>
+  <script>
+    function statusChangeCallback(response) {
+      console.log('statusChangeCallback');
+      console.log(response);
+       if (response.status === 'connected') {
+         testAPI();
+       } else if (response.status === 'not_authorized') {
+         document.getElementById('status').innerHTML = 'Please log ' +
+           'into this app.';
+       } else {
+        //  document.getElementById('status').innerHTML = 'Please log ' +
+        //    'into Facebook.';
+       }
+    }
+
+    function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+    }
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '952480068180655',
+        cookie     : true,
+
+        xfbml      : true,
+        version    : 'v2.5'
+      });
+
+      FB.login(function(response) {
+        console.log(response);
+        if (response.status === 'connected') {
+          console.log(response.authResponse.accessToken);
+        } else if (response.status === 'not_authorized') {
+          // The person is logged into Facebook, but not your app.
+        } else {
+          // The person is not logged into Facebook, so we're not sure if
+          // they are logged into this app or not.
+        }
+      });
+
+      // FB.getLoginStatus(function(response) {
+      //   if (response.status === 'connected') {
+      //
+      //   }
+      // });
+
+      // FB.api('/me', function(response) {
+      //   console.log(JSON.stringify(response));
+      // });
+    };
+
+
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+     function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+          console.log('Successful login for: ' + response.name);
+          document.getElementById('status').innerHTML =
+            'Thanks for logging in, ' + response.name + '!';
+        });
+      }
+  </script>
+
+  <header role="banner" class="mar-t-5 pad-t-2 pad-b-4 pad-s-1 wrap-float bg-white">
+    <div class="max-w-700 center wrap-float">
+      <nav class="clearfix mar-b-1">
+        <ul class="no-bullets no-margin no-padding right">
+          <!-- <li class="pipe-separate t-light-blue left"><a href="/">home</a></li> -->
+
+          <% if !logged_in? %>
+            <li class="pipe-separate t-light-blue left"><a href="/users/new">register</a></li>
+            <li class="pipe-separate t-light-blue left"><a href="/session">login</a></li>
+          <% else %>
+            <li class="pipe-separate t-light-blue left">
+              <form method="post" action="/session">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="logout" class="button">
+              </form>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+
+      <div class="logo-container">
+        <img class="logo" src="/images/yarn-clipart-1.jpg" class="center block">
+        <h1>Sockly</h1>
+      </div>
+    </div>
+  </header>
+
+  <div class="bg-dk-blue pad-t-2 pad-s-1 pad-b-8 mar-b-16 c-white">
+    <div class="max-w-700 center">
+      <%= yield %>
+    </div>
+  </div>
+
+
+</body>
+</html>

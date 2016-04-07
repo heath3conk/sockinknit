@@ -1,0 +1,14 @@
+<div>
+  <label for="recipient[name]">First Name:</label>
+  <input type="text" name="recipient[name]" value="<%= recipient.try(:name) %>" class="input">
+</div>
+
+<div>
+  <label for="recipient[foot_length]">Foot length:</label>
+  <input type="text" name="recipient[foot_length]" value="<%= recipient.try(:foot_length) %>" class="input">
+</div>
+
+<div>
+  <label for="recipient[foot_circumference]">Foot circumference:</label>
+  <input type="text" name="recipient[foot_circumference]" value="<%= recipient.try(:foot_circumference) %>" class="input">
+</div>

@@ -1,0 +1,12 @@
+<form method="get" action="/projects">
+  <input  type = "submit" value="Start a new project!" class="button">
+</form>
+
+<h1>Your projects:</h1>
+<div class="project-container">
+    <% if @user.projects %>
+    <% @user.projects.each do |project| %>
+      <h2><a href="/projects/<%= project.id %>"><%= project.project_name %></a></h2>
+    <% end %>
+  <% end %>
+</div>
