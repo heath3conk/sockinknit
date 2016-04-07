@@ -1,0 +1,15 @@
+<div class="container">
+  <% if @errors%>
+    <%= erb :'_errors', locals: {errors: @errors}%>
+  <% end %>
+
+  <h3>Create a new account</h3>
+  <form method="post" action="/users">
+    <%= erb :'/users/_form', locals: {user: @user} %>
+    <%= erb :'/recipients/_recipient_form', locals: {recipient: @recipient} %>
+    <input type="submit" value="Sign up" class="button">
+  </form>
+
+  <h3>Or register with facebook</h3>
+  <%= erb :'/_facebook'%>
+</div>

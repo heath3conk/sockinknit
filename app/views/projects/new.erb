@@ -1,0 +1,52 @@
+<h1>We love a new project...</h1>
+
+<% if @errors %>
+  <span>Something went wrong:</span>
+  <ul class="error-list pad-b-2">
+    <% @errors.each do |error| %>
+      <li class="error-item"><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<form method="post" action="/projects">
+  <div>
+    <label for="project[project_name]">Project name:</label>
+    <input type="text" name="project[project_name]" value="<%= @project.try(:project_name)%>" class="input">
+  </div>
+  <div>
+    <label for="recipient[name]">Recipient:</label>
+    <input type="text" name="recipient[name]" placeholder="recipient first name" class="input">
+  </div>
+  <div>
+    <label for="project[yarn_name]">Yarn name:</label>
+    <input type="text" name="project[yarn_name]" value="<%= @project.try(:yarn_name)%>" class="input">
+  </div>
+  <div>
+    <label for="project[yarn_type]">Yarn type:</label>
+    <input type="text" name="project[yarn_type]" value="<%= @project.try(:yarn_type)%>" class="input">
+  </div>
+  <div>
+    <label for="project[needle_size]">Needle size:</label>
+    <input type="text" name="project[needle_size]" value="<%= @project.try(:needle_size)%>" class="input">
+  </div>
+  <div>
+    <label for="project[swatch_width]">Swatch width:</label>
+    <input type="text" name="project[swatch_width]" value="<%= @project.try(:swatch_width)%>" class="input">
+  </div>
+  <div>
+    <label for="project[swatch_height]">Swatch height:</label>
+    <input type="text" name="project[swatch_height]" value="<%= @project.try(:swatch_height)%>" class="input">
+  </div>
+  <div>
+    <label for="project[swatch_stitch_count]">Swatch stitch count:</label>
+    <input type="text" name="project[swatch_stitch_count]" value="<%= @project.try(:swatch_stitch_count)%>" class="input">
+  </div>
+  <div>
+    <label for="project[swatch_row_count]">Swatch row count:</label>
+    <input type="text" name="project[swatch_row_count]" value="<%= @project.try(:swatch_row_count)%>" class="input" class="input">
+  </div>
+  <div>
+    <input type="submit" value="Create your project!" class="button">
+  </div>
+</form

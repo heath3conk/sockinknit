@@ -1,0 +1,14 @@
+<div class="container">
+  <% if @errors%>
+    <%= erb :'_errors', locals: {errors: @errors}%>
+  <% end %>
+
+  <h3>Log in to your account</h3>
+  <form method="post" action="/session">
+    <%= erb :'/users/_form', locals: {user: @user} %>
+    <input type = "submit" value="Log in" class="button">
+  </form>
+
+  <h3>Or log in with facebook</h3>
+  <%= erb :'/_facebook'%>
+</div>
