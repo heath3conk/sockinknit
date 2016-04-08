@@ -7,39 +7,38 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
 
-  <title>Sockly</title>
+  <title>Sockinknit</title>
 </head>
 <body>
   
-  <header role="banner" class="mar-t-5 pad-t-2 pad-b-4 pad-s-1 wrap-float bg-white">
+  <header role="banner" class="mar-t-5 pad-t-2 pad-b-1 pad-s-1 wrap-float bg-white">
     <div class="max-w-700 center wrap-float">
       <nav class="clearfix mar-b-1">
         <ul class="no-bullets no-margin no-padding right">
-          <!-- <li class="pipe-separate t-light-blue left"><a href="/">home</a></li> -->
-
+            <li class="pipe-separate t-light-blue left"><a href="/">home</a></li>
+          
           <% if !logged_in? %>
             <li class="pipe-separate t-light-blue left"><a href="/users/new">register</a></li>
             <li class="pipe-separate t-light-blue left"><a href="/session">login</a></li>
           <% else %>
+            <li class="pipe-separate t-light-blue left"><a href="/users/<%= current_user.id %>"><%= current_user.username %></a></li>
             <li class="pipe-separate t-light-blue left">
               <form method="post" action="/session">
                 <input type="hidden" name="_method" value="delete">
-                <input type="submit" value="logout" class="button">
+                <input type="submit" value="logout" class="logout-button">
               </form>
             </li>
           <% end %>
+          
+            <li class="pipe-separate t-light-blue left"><a href="/shops">find your local yarn store</a></li>
         </ul>
       </nav>
-
-      <div class="logo-container">
-        <img class="logo" src="/images/yarn-clipart-1.jpg" class="center block">
-        <h1>Sockly</h1>
-      </div>
     </div>
+     
   </header>
 
   <div class="bg-dk-blue pad-t-2 pad-s-1 pad-b-8 mar-b-16 c-white">
-    <div class="max-w-700 center">
+    <div class="max-w-700 main center">
       <%= yield %>
     </div>
   </div>
